@@ -16,18 +16,19 @@ export const CertificateIssue = ({ rows, setRows, month, branch }) => {
   const isLoaded = useRef(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    const storageKey = `cert_v2_${branch}_${month}`;
-    const savedData = localStorage.getItem(storageKey);
-    if (savedData && savedData !== "[]") {
-      setRows(JSON.parse(savedData));
-    } else {
-      setRows([createNewRow([])]);
-    }
-    setTimeout(() => {
-      isLoaded.current = true;
-    }, 500);
-  }, [branch, month]);
+useEffect(() => {
+  const storageKey = `cert_v2_${branch}_${month}`;
+  const savedData = localStorage.getItem(storageKey);
+  if (savedData && savedData !== "[]") {
+    setRows(JSON.parse(savedData));
+  } else {
+    setRows([createNewRow([])]);
+  }
+  setTimeout(() => {
+    isLoaded.current = true;
+  }, 500);
+}, [branch, month, setRows]);
+
 
   useEffect(() => {
     if (isLoaded.current) {
